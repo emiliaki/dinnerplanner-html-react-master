@@ -15,12 +15,6 @@ class SelectDish extends Component {
     }
   }
 
-  componentWillReceiveProps(Props){
-    this.setState({
-      type: Props.type,
-      filter: Props.filter
-    })
-  }
 
   search = (type, filter)=> {
     this.setState({
