@@ -2,6 +2,7 @@ import React, { Component } from "react";
 // Alternative to passing the moderl as the component property,
 // we can import the model instance directly
 import modelInstance from "../data/DinnerModel";
+import { Link } from "react-router-dom";
 import "./Dishes.css";
 
 class Dishes extends Component {
@@ -14,14 +15,31 @@ class Dishes extends Component {
     };
   }
 
+  componentDidMount = () => {
+    // when data is retrieved we update the state
+    // this will cause the component to re-render
+     
+    this.update(this.props.type, this.props.filter);
+  
+  }
+
+  componentWillReceiveProps = (props) => {
+    // when data is retrieved we update the state
+    // this will cause the component to re-render
+     
+    this.update(props.type, props.filter);
+  
+  }
+
+
   // this methods is called by React lifecycle when the
   // component is actually shown to the user (mounted to DOM)
   // that's a good place to call the API and get the data
-  componentDidMount() {
+  update(type, filter) {
     // when data is retrieved we update the state
     // this will cause the component to re-render
     modelInstance
-      .getAllDishes()
+      .getAllDishes(type, filter)
       .then(dishes => {
         this.setState({
           status: "LOADED",
@@ -35,6 +53,8 @@ class Dishes extends Component {
       });
   }
 
+
+
   render() {
     let dishesList = null;
 
@@ -47,7 +67,14 @@ class Dishes extends Component {
         break;
       case "LOADED":
         dishesList = this.state.dishes.map(dish => (
-          <li key={dish.id}>{dish.title}</li>
+
+          
+          <Link to="/dishdetails">
+          <div id ="picturediv">
+          <img id="images" src = {"http://spoonacular.com/recipeImages/" + dish.image} key={dish.id}></img>
+          <p id="title" >{dish.title} </p>
+          </div>
+          </Link>
         ));
         break;
       default:
