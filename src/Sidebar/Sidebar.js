@@ -13,7 +13,7 @@ class Sidebar extends Component {
     };
   }
 
-
+  
   
   // this methods is called by React lifecycle when the
   // component is actually shown to the user (mounted to DOM)
