@@ -1,11 +1,8 @@
 import React, { Component } from 'react';
-
+import "./Searchbar.css"
 class SearchBar extends Component {
 
-	constructor(props) {
-      super(props);
-    
-  }
+
 
   filterchange = (e) => {
     this.props.whenSearch(this.refs.typeinput.value, this.refs.filterinput.value);
@@ -18,8 +15,10 @@ class SearchBar extends Component {
   
   render() {
     return (
-      <div className="SelectDish">
-       
+      
+      <div id="SelectDish">
+      <h2> Find a dish </h2>
+       <div id="type">
         <select ref="typeinput" onChange={this.typechange}>
           <option value="all">all</option>
           <option value="breakfast">breakfast</option>
@@ -35,8 +34,10 @@ class SearchBar extends Component {
           <option value="drink">drink</option>
         
         </select>
-
+        </div>
+        <div id="type">
         <input ref="filterinput" onChange={this.filterchange}/>
+        </div>
       </div>
     );
   }

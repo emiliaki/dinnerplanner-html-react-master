@@ -1,6 +1,6 @@
 import ObservableModel from "./ObservableModel";
 
-let API_KEY= '3d2a031b4cmsh5cd4e7b939ada54p19f679jsn9a775627d767';
+
 
 const BASE_URL =`http://sunset.nada.kth.se:8080/iprog/group/44`;
 const httpOptions = {
@@ -14,6 +14,10 @@ class DinnerModel extends ObservableModel {
     super();
     this._numberOfGuests = 4;
     this.getNumberOfGuests();
+    this.menu = [];
+    if(localStorage.getItem('menu')){
+      this.menu = JSON.parse(localStorage.getItem('menu')); 
+    }
    
   }
 
@@ -22,7 +26,8 @@ class DinnerModel extends ObservableModel {
    * @returns {number}
    */
   getNumberOfGuests() {
-    return this._numberOfGuests;
+   
+    return localStorage.getItem("numberOfGuests");
   }
 
   /**
@@ -31,15 +36,41 @@ class DinnerModel extends ObservableModel {
    */
   setNumberOfGuests(num) {
     if (num<1){
-			this._numberOfGuests = 1;
+      this._numberOfGuests = 1;
+      localStorage.setItem("numberOfGuests", this._numberOfGuests);
+      this.notifyObservers();
+      
 		}
 
 		else{
-			this._numberOfGuests = num;
+      this._numberOfGuests = num;
+      localStorage.setItem("numberOfGuests", this._numberOfGuests);
+      this.notifyObservers();
+      
 		}
-		this.notifyObservers("NumberOfGuests");
+		
 		
   }
+
+  addDishToMenu(new_dish) {
+    for (let dsh of this.menu) {
+      if (dsh.id === new_dish.id){
+        this.menu.splice(this.menu.indexOf(dsh), 1);
+
+      }
+    }
+      this.menu.push(new_dish);
+        localStorage.setItem("menu", JSON.stringify(this.menu))
+      this.notifyObservers();
+}
+
+    addDishToMenu1(dish) {
+  this.menu.push(dish);
+  if (typeof (Storage) !== "undefined") {
+    localStorage.setItem("menu", JSON.stringify(this.menu));
+  }
+  this.notifyObservers();
+}
 
   // API methods
 
@@ -64,7 +95,17 @@ class DinnerModel extends ObservableModel {
     }
     throw response;
   }
+
+
+getFullMenu() {
+  return this.menu;
 }
+
+getDish (id) {
+  const url = `${BASE_URL}/recipes/${id}/information?includeNutrition=false`;
+  return fetch(url, httpOptions).then(this.processResponse);
+}
+} 
 
 
 

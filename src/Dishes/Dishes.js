@@ -5,6 +5,7 @@ import modelInstance from "../data/DinnerModel";
 import { Link } from "react-router-dom";
 import "./Dishes.css";
 
+
 class Dishes extends Component {
   constructor(props) {
     super(props);
@@ -18,7 +19,7 @@ class Dishes extends Component {
   componentDidMount = () => {
     // when data is retrieved we update the state
     // this will cause the component to re-render
-     
+    
     this.update(this.props.type, this.props.filter);
   
   }
@@ -69,10 +70,10 @@ class Dishes extends Component {
         dishesList = this.state.dishes.map(dish => (
 
           
-          <Link to="/dishdetails">
-          <div id ="picturediv">
-          <img id="images" src = {"http://spoonacular.com/recipeImages/" + dish.image} key={dish.id}></img>
-          <p id="title" >{dish.title} </p>
+          <Link to={`/dishdetails/${dish.id}` }>
+          <div id ="picturediv" >
+          <img id="images" src = {"http://spoonacular.com/recipeImages/" + dish.image} key={dish.id} alt="can't show image"></img>
+          <p id="title2" >{dish.title} </p>
           </div>
           </Link>
         ));
@@ -84,7 +85,6 @@ class Dishes extends Component {
 
     return (
       <div className="Dishes">
-        <h3>Dishes</h3>
         <ul>{dishesList}</ul>
       </div>
     );

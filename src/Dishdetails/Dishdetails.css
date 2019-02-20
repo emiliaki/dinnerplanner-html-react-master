@@ -1,0 +1,49 @@
+#detailimage {
+    border: solid black;
+    height: 300px;
+    width: 400px; 
+    
+}
+
+#preparation {
+    width: 500px;
+    display: block;
+}
+
+#title {
+    font-size: 24px;
+    text-align: center;}
+
+
+#row {
+    display: flex;
+    
+   
+}
+
+#ingredientscreen{
+    border: solid grey;
+    width: 350px;
+    padding: 30px;
+}
+
+#DishDetails{
+    padding: 30px;
+    
+}
+
+#totalprice {
+    margin-top: 15px;
+    border: solid grey;
+    width: 150px;
+    padding: 10px;
+}
+
+button {
+    background-color: orange;
+    font-size: 15px;
+    padding: 10px;
+    margin-top: 10px;
+}
+
+

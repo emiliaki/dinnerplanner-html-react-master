@@ -30,11 +30,10 @@ class SelectDish extends Component {
         <h2>This is the Select Dish screen</h2>
         
         {/* We pass the model as property to the Sidebar component */}
-        <div className="col-xs-3">
+        <SearchBar whenSearch={this.search}/>
+        <div id="row">
           <Sidebar model={this.props.model}/>
-        </div>
-        <div className="col-xs-9">
-          <SearchBar whenSearch={this.search}/>
+        
           <Dishes model={this.props.model} type={this.state.type} filter={this.state.filter}/>
         </div>
       </div>

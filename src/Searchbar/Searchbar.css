@@ -1,0 +1,8 @@
+#SelectDish{
+    text-align: center;
+}
+
+#type {
+    display: inline-block;
+    padding: 10px;
+}
